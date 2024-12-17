@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disable Third-Party Cookies</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f5a623, #f76b1c, #d52d2f);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      width: 90%;
+      max-width: 300px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .status {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff4f5e;
+      color: white;
+      border-radius: 5px;
+      display: inline-block;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Third-Party Cookies Status</h1>
+    <div class="status" id="cookie-status">Third-Party Cookies are stopped</div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      chrome.privacy.websites.thirdPartyCookiesAllowed.get({}, function(details) {
+        const status = details.value ? "Third-Party Cookies are enabled" : "Third-Party Cookies are stopped";
+        document.getElementById('cookie-status').textContent = status;
+      });
+    });
+  </script>
+</body>
+</html>
